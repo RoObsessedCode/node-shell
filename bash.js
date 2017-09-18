@@ -6,7 +6,11 @@ process.stdout.write('prompt > ');
 
 //The stdin 'data' event fires after user types a line
 process.stdin.on('data', (data) => {
-  var cmd = data.toString().trim();
+  let userInput = data.toString().trim().split(" ");
+  let cmd = userInput.shift();
+  let userArgs = userInput.join(' ');
+
+
   switch (cmd) {
     case 'date':
       cmds[cmd]();
@@ -20,9 +24,15 @@ process.stdin.on('data', (data) => {
       cmds[cmd]();
       break;
 
+    case 'echo':
+      cmds[cmd](userArgs);
+      break;
+
     default:
       process.stdout.write(`You typed: ${cmd}`);
-  };
+      process.stdout.write('\nprompt > ');
+  }
+
   // if (cmd === 'date') {
   //   process.stdout.write(Date());
   // } else if (cmd === 'pwd') {

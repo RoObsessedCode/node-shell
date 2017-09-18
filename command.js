@@ -20,6 +20,11 @@ module.exports = {
   date: () => {
     process.stdout.write(Date());
     process.stdout.write('\nprompt > ');
+  },
+
+  echo: (args) => {
+    process.stdout.write(args);
+    process.stdout.write('\nprompt > ');
   }
 
 };
