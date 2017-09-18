@@ -23,7 +23,11 @@ module.exports = {
   },
 
   echo: (args) => {
-    process.stdout.write(args);
+    if (process.env[args.slice(1)]) {
+      process.stdout.write(process.env[args.slice(1)]);
+    } else {
+      process.stdout.write(args);
+    }
     process.stdout.write('\nprompt > ');
   }
 
