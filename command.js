@@ -2,12 +2,12 @@ let fs = require('fs');
 
 module.exports = {
 
-  pwd: () => {
+  pwd: (_) => {
     process.stdout.write(`${process.cwd()}`);
     process.stdout.write('\nprompt > ');
   },
 
-  ls: () => {
+  ls: (_) => {
     fs.readdir('.', (err, files) => {
       if (err) throw err;
       files.forEach((file) => {
@@ -17,7 +17,7 @@ module.exports = {
     })
   },
 
-  date: () => {
+  date: (_) => {
     process.stdout.write(Date());
     process.stdout.write('\nprompt > ');
   },
@@ -29,6 +29,13 @@ module.exports = {
       process.stdout.write(args);
     }
     process.stdout.write('\nprompt > ');
-  }
+  },
 
+  cat: (file) => {
+    fs.readFile(file, (err, data) => {
+      if (err) throw err;
+      process.stdout.write(data);
+      process.stdout.write('\nprompt > ');
+    })
+  }
 };
